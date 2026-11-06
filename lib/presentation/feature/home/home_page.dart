@@ -14,6 +14,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.background,
         title: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -68,6 +69,54 @@ class _HomePageState extends State<HomePage> {
             'Farshy',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
           ),
+
+              Container(
+                width: 100,
+                decoration: BoxDecoration(
+                  color: AppColors.cardBackground,
+                  borderRadius: .circular(24),
+                  boxShadow: [BoxShadow(
+                    color: AppColors.shadow,
+                    blurRadius: 8,
+                    offset: Offset.zero
+                    
+                  )]
+                ),
+
+                margin: EdgeInsets.symmetric(vertical: 16),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 18,
+                  right: 16,
+                  top: 8,
+                  bottom: 8
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.task, color: AppColors.primary,),
+                    Text("10",
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.primaryText
+                      ),
+                    ),
+
+                    Text(AppString.total,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.secondaryText
+
+                      ),
+
+                    )
+                  ],
+                ),
+              ),
+              )
+
       ]
       )
     )
