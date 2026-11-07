@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/core/app_color.dart';
 import 'package:task_manager/core/app_string.dart';
+import 'package:task_manager/presentation/feature/home/widget/app_logo.dart';
+import 'package:task_manager/presentation/feature/home/widget/stat_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,15 +22,7 @@ class _HomePageState extends State<HomePage> {
           child: Row(
             spacing: 12,
             children: [
-              Container(
-                height: 24,
-                width: 24,
-                decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(8),
-                ),
-                child: Icon(Icons.check, color: AppColors.background, size: 13,),
-              ),
+              AppLogo(),
 
                 Text(AppString.appName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)
             ],
@@ -69,54 +63,36 @@ class _HomePageState extends State<HomePage> {
             'Farshy',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
           ),
-
-              Container(
-                width: 100,
-                decoration: BoxDecoration(
-                  color: AppColors.cardBackground,
-                  borderRadius: .circular(24),
-                  boxShadow: [BoxShadow(
-                    color: AppColors.shadow,
-                    blurRadius: 8,
-                    offset: Offset.zero
-                    
-                  )]
-                ),
-
-                margin: EdgeInsets.symmetric(vertical: 16),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 18,
-                  right: 16,
-                  top: 8,
-                  bottom: 8
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(Icons.task, color: AppColors.primary,),
-                    Text("10",
-                      style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w800,
-                          color: AppColors.primaryText
-                      ),
+              Row(
+                spacing: 10,
+                children: [
+                  Expanded(
+                    child: StatCard(
+                      icon: Icons.format_list_bulleted,
+                      iconColor: AppColors.primary,
+                      count: 0,
+                      label: 'Total',
                     ),
+                  ),
+                  Expanded(
+                    child: StatCard(
+                      icon: Icons.schedule,
+                      iconColor: AppColors.amberIcon,
+                      count: 0,
+                      label: 'Pending',
+                    ),
+                  ),
+                  Expanded(
+                    child: StatCard(
+                      icon: Icons.check_circle_outline,
+                      iconColor: AppColors.greenIcon,
+                      count: 0,
+                      label: 'Completed',
+                    ),
+                  ),
 
-                    Text(AppString.total,
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.secondaryText
-
-                      ),
-
-                    )
-                  ],
-                ),
-              ),
+                ],
               )
-
       ]
       )
     )
