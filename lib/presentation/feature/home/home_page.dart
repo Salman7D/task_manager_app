@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:task_manager/core/app_color.dart';
 import 'package:task_manager/core/app_string.dart';
 import 'package:task_manager/presentation/feature/home/widget/app_logo.dart';
+import 'package:task_manager/presentation/feature/home/widget/filter_button.dart';
 import 'package:task_manager/presentation/feature/home/widget/stat_card.dart';
+import 'package:task_manager/presentation/feature/home/widget/task_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -92,7 +94,27 @@ class _HomePageState extends State<HomePage> {
                   ),
 
                 ],
-              )
+              ),
+              Row(
+                spacing: 10,
+                children: [
+                  Expanded(child: FilterButton(
+                      label: "All",
+                      isSelected: true,
+                      onTap: (){})),
+                  Expanded(child: FilterButton(
+                      label: "Pending",
+                      isSelected: false,
+                      onTap: (){})),
+                  Expanded(child: FilterButton(
+                      label: "Completed",
+                      isSelected: false,
+                      onTap: (){})),
+
+                ],
+
+              ),
+              TaskCard()
       ]
       )
     )
