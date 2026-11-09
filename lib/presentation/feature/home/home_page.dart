@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/core/app_color.dart';
 import 'package:task_manager/core/app_string.dart';
+import 'package:task_manager/core/task.dart';
 import 'package:task_manager/presentation/feature/home/widget/app_logo.dart';
 import 'package:task_manager/presentation/feature/home/widget/filter_button.dart';
 import 'package:task_manager/presentation/feature/home/widget/stat_card.dart';
@@ -14,6 +15,39 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  final List<Task> _tasks = demoTasks;
+
+  String _selectedFilter = AppString.all;
+
+  List<Task> get _visibleTask {
+    if(_selectedFilter == AppString.pending){
+      return _tasks.where((task) => task.isCompleted == false).toList();
+    }
+    else if(_selectedFilter == AppString.completed){
+      return _tasks.where((task) => task.isCompleted == true).toList();
+    }
+    else{
+      return _tasks;
+    }
+  }
+
+  int get _completedCount => _tasks.where((task) => task.isCompleted == true).length;
+  int get _pendingCount => _tasks.where((task) => task.isCompleted == false).length;
+
+  void _onFilterTap(String filter) {
+    setState(() {
+      _selectedFilter = filter;
+    });
+  }
+
+    void _onStatusTap(Task task){
+      setState(() {
+        task.isCompleted = !task.isCompleted;
+      });
+    }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,10 +148,39 @@ class _HomePageState extends State<HomePage> {
                 ],
 
               ),
-              TaskCard()
+              TaskCard(
+                task: Task(
+                  title: 'Finish onboarding flow mockups',
+                  description:
+                  'Wrap up the new user onboarding screens for review.',
+                  dueDate: 'Nov 4',
+                  priority: 'High',
+                  createdDate: 'Oct 28, 2026',
+                ),
+                onTap: () {},
+                onStatusTap: () {},
+              ),
+              TaskCard(
+                task: Task(
+                  title: 'Finish onboarding flow mockups',
+                  description:
+                  'Wrap up the new user onboarding screens for review.',
+                  dueDate: 'Nov 4',
+                  priority: 'High',
+                  createdDate: 'Oct 28, 2026',
+                ),
+                onTap: () {},
+                onStatusTap: () {},
+              ),
       ]
       )
-    )
+    ),
+        floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: AppColors.primary,
+        child: Icon(Icons.add, color: AppColors.white),
+    ),
+
     );
   }
 }
