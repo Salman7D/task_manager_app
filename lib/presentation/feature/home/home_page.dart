@@ -47,9 +47,14 @@ class _HomePageState extends State<HomePage> {
       });
     }
 
+  void _goToAddTask(){}
+  void _goToDetails(){}
+
 
   @override
   Widget build(BuildContext context) {
+    List<Task> visibleTask = _visibleTask;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.background,
@@ -106,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                     child: StatCard(
                       icon: Icons.format_list_bulleted,
                       iconColor: AppColors.primary,
-                      count: 0,
+                      count: _tasks.length,
                       label: 'Total',
                     ),
                   ),
@@ -114,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                     child: StatCard(
                       icon: Icons.schedule,
                       iconColor: AppColors.amberIcon,
-                      count: 0,
+                      count: _pendingCount,
                       label: 'Pending',
                     ),
                   ),
@@ -122,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                     child: StatCard(
                       icon: Icons.check_circle_outline,
                       iconColor: AppColors.greenIcon,
-                      count: 0,
+                      count: _completedCount,
                       label: 'Completed',
                     ),
                   ),
@@ -134,20 +139,62 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Expanded(child: FilterButton(
                       label: "All",
-                      isSelected: true,
-                      onTap: (){})),
+                      isSelected: _selectedFilter == AppString.all,
+                      onTap: () => _onFilterTap(AppString.all))),
                   Expanded(child: FilterButton(
                       label: "Pending",
-                      isSelected: false,
-                      onTap: (){})),
+                      isSelected: _selectedFilter == AppString.pending,
+                      onTap: () => _onFilterTap(AppString.pending))),
                   Expanded(child: FilterButton(
                       label: "Completed",
-                      isSelected: false,
-                      onTap: (){})),
+                      isSelected: _selectedFilter == AppString.completed,
+                      onTap: () => _onFilterTap(AppString.completed))),
 
                 ],
 
               ),
+              if(_tasks.isNotEmpty)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+
+                  Text(
+                    AppString.tasks,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700
+                    ),
+                  ),
+                  Text(
+                    '${visibleTask.length} ${AppString.tasks}',
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700
+                    ),
+                  ),
+
+                ],
+              ),
+
+              Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: visibleTask.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: TaskCard(
+                        task: visibleTask[index],
+                        onTap: _goToDetails,
+                        onStatusTap: () => _onStatusTap(visibleTask[index]),
+                      ),
+                    );
+                  },
+                ),
+              ),
+
+
+              /*
               TaskCard(
                 task: Task(
                   title: 'Finish onboarding flow mockups',
@@ -172,6 +219,8 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {},
                 onStatusTap: () {},
               ),
+
+               */
       ]
       )
     ),

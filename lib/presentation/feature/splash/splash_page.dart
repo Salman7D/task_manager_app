@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:task_manager/core/app_color.dart';
 import 'package:task_manager/core/app_string.dart';
+import 'package:task_manager/presentation/feature/add_edit_task/add_edit_task_page.dart';
 import 'package:task_manager/presentation/feature/home/home_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -30,7 +31,7 @@ class _SplashPageState extends State<SplashPage> {
 
   void _goToHome(){
     Navigator.of(context).
-    pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
+    pushReplacement(MaterialPageRoute(builder: (context) => AddEditTaskPage()));
   }
 
   @override
