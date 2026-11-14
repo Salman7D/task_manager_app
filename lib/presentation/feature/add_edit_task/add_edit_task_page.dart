@@ -24,7 +24,7 @@ class _AddEditTaskPageState extends State<AddEditTaskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(title: Text("Add/Edit Task"),
+      appBar: AppBar(title: Text("Add Task"),
       leading: SquareIconButton(icon: Icons.arrow_back, onTap: () {
         Navigator.of(context).pop();
       },
